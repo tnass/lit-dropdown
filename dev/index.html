@@ -1,22 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>&lt;my-element> Demo</title>
+    <title>&lt;lit-dropdown&gt; Web Component Demo Page</title>
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/lit/polyfill-support.js"></script>
-    <script type="module" src="../my-element.js"></script>
+    <script type="module" src="../lit-dropdown.js"></script>
     <style>
-      p {
-        border: solid 1px blue;
-        padding: 8px;
+      .anything-button {
+        width: 150px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
+        border-radius: 3px;
+        background-color: cadetblue;
+        color: white;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      @scope (.themed) {
+        :scope {
+          --lit-dropdown-color: white;
+          --lit-dropdown-background-color: steelblue;
+          --lit-dropdown-background-hover-color: khaki;
+        }
       }
     </style>
   </head>
   <body>
-    <my-element>
-      <p>This is child content</p>
-    </my-element>
+    <header>
+      <h1>Lit Dropdown Web Component Demo</h1>
+    </header>
+    <section>
+      <lit-dropdown
+        text="Button Demo"
+        values='["Item 1", "Item 2", "Item 3", "Item 4"]'
+      ></lit-dropdown>
+
+      <lit-dropdown
+        class="themed"
+        text="Preselected Demo (I'm themed)"
+        values='["Item 1", "Item 2", "Item 3", "Item 4"]'
+        preselected="Item 2"
+      ></lit-dropdown>
+
+      <lit-dropdown
+        text="Right Alignment Demo"
+        values='["Item 1", "Item 2", "Item 3", "Item 4"]'
+        right
+      ></lit-dropdown>
+
+      <lit-dropdown values='["Item 1", "Item 2", "Item 3", "Item 4"]'>
+        <div class="anything-button">
+          <div>Anything Demo</div>
+          <img src="./chevron.svg" width="16" alt="" />
+        </div>
+      </lit-dropdown>
+    </section>
+    <script>
+      document
+        .querySelector('section > lit-dropdown')
+        .addEventListener('item-select', (e) => {
+          console.log('Selected Value:', e.detail.value);
+        });
+    </script>
   </body>
 </html>
